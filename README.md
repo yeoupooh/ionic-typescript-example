@@ -78,6 +78,8 @@ gulp.task('watch', function() {
 
 Now that we can compile our code, let's get rid of those errors and start annotating our code.
 
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/H6NxUieUjyM/0.jpg)](http://www.youtube.com/watch?v=H6NxUieUjyM)
+
 There's a big community project, [Definitely Typed](https://github.com/borisyankov/DefinitelyTyped), which adds typings for a large number of frameworks/libraries. To add these typings to our project, we can install a definition manager, [TSD](http://definitelytyped.org/tsd/) from npm. 
 
 ```bash
