@@ -1,22 +1,43 @@
 /// <reference path="../typings/tsd.d.ts" />
+class DashCtrl {
+  constructor() { }
+}
+
+class ChatsCtrl {
+  public $inject = ['Chats']
+  chats: any[];
+  constructor(public Chats: any) {
+    this.chats = Chats.all();
+  }
+  public remove(chat) {
+    this.Chats.remove(chat)
+  }
+}
+
+class ChatDetailCtrl {
+  public $inject = ['Chats', '$stateParams']
+  chat: Object;
+  constructor(
+    public Chats: any,
+    public $stateParams: ng.ui.IStateParamsService
+    ) {
+    this.chat = Chats.get($stateParams.chatId);
+  }
+}
+class AccountCtrl {
+  settings: Object;
+  constructor() {
+    this.settings = {
+      enableFriends: true
+    }
+  }
+}
 angular.module('starter.controllers', [])
 
-  .controller('DashCtrl', function($scope, $ionicLoading: ionic.loading.IonicLoadingService) {
-})
+  .controller('DashCtrl', DashCtrl)
 
-  .controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
+  .controller('ChatsCtrl', ChatsCtrl)
 
-  .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+  .controller('ChatDetailCtrl', ChatDetailCtrl)
 
-  .controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+  .controller('AccountCtrl', AccountCtrl);
