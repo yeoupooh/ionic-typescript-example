@@ -1,12 +1,24 @@
 
 /// <reference path="../typings/tsd.d.ts" />
-angular.module('starter.services', [])
+module Services {
+export interface IChatsService{
+  all(): Array<IChatsUser>;
+  remove(chat: IChatsUser);
+  get(chatId: string);
+  
+};
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+export interface IChatsUser{
+  id: Number;
+  name: String;
+  lastText: String;
+  face: String;
+}
 
-  // Some fake testing data
-  var chats = [{
+export class Chats implements IChatsService{
+  chats: Array<IChatsUser>;
+  constructor(){
+  this.chats = [{
     id: 0,
     name: 'Ben Sparrow',
     lastText: 'You on your way?',
@@ -32,21 +44,25 @@ angular.module('starter.services', [])
     lastText: 'This is wicked good ice cream.',
     face: 'https://pbs.twimg.com/profile_images/578237281384841216/R3ae1n61.png'
   }];
-
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    
+  }
+  
+   all() {
+      return this.chats;
+    };
+    remove(chat) {
+      this.chats.splice(this.chats.indexOf(chat), 1);
+    };
+    get(chatId) {
+      for (var i = 0; i < this.chats.length; i++) {
+        if (this.chats[i].id === parseInt(chatId)) {
+          return this.chats[i];
         }
       }
       return null;
-    }
-  };
-});
+    };
+}
+}
+angular.module('starter.services', [])
+
+.service('Chats', Services.Chats);
